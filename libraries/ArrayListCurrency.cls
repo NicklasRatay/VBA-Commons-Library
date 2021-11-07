@@ -2,58 +2,58 @@ VERSION 1.0 CLASS
 BEGIN
   MultiUse = -1  'True
 END
-Attribute VB_Name = "ArrayList"
+Attribute VB_Name = "ArrayListCurrency"
 Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
 
-Private Elements() As Variant ' Array that stores all items
+Private m_Items() As Currency ' Array that stores all items
 
-Public Sub Add(ByRef Item As Variant, Optional ByVal Index As Long = -1)
+Public Sub Add(ByRef item As Currency, Optional ByVal index As Long = -1)
 ' Adds an <Item> to this array (at <Index> if specified)
 
     Dim i As Long, size As Long
     
     size = Me.GetSize
-    ReDim Preserve Elements(size)
+    ReDim Preserve m_Items(size)
     
-    If Index = -1 Then
-        Index = size
+    If index = -1 Then
+        index = size
     End If
     
     ' Reposition items after <Index>
-    For i = size To Index + 1 Step -1
-        Elements(i) = Elements(i - 1)
+    For i = size To index + 1 Step -1
+        m_Items(i) = m_Items(i - 1)
     Next i
     
-    Elements(Index) = Item ' Set value at <Index> to <Item>
+    m_Items(index) = item ' Set value at <Index> to <Item>
     
 End Sub
 
-Public Sub AddAll(ByVal ArrayList As ArrayList, Optional ByVal Index As Long = -1)
-' Adds all items of <ArrayList> to this array
+Public Sub AddAll(ByVal list As ArrayListCurrency, Optional ByVal index As Long = -1)
+' Adds all items of <ArrayListCurrency> to this array
 
     Dim i As Long, ownSize As Long, otherSize As Long
     
     ownSize = Me.GetSize
-    otherSize = ArrayList.GetSize
+    otherSize = ArrayListCurrency.GetSize
     
-    If Index = -1 Then
-        Index = ownSize
+    If index = -1 Then
+        index = ownSize
     End If
     
-    ReDim Preserve Elements(ownSize + otherSize - 1)
+    ReDim Preserve m_Items(ownSize + otherSize - 1)
     
     ' Reposition items after <Index>
-    For i = ownSize + otherSize - 1 To Index + otherSize Step -1
-        Elements(i) = Elements(i - otherSize)
+    For i = ownSize + otherSize - 1 To index + otherSize Step -1
+        m_Items(i) = m_Items(i - otherSize)
     Next i
     
-    ' Inserts items of <ArrayList>
+    ' Inserts items of <ArrayListCurrency>
     For i = 0 To otherSize - 1
-        Elements(i + Index) = ArrayList.GetItem(i)
+        m_Items(i + index) = ArrayListCurrency.GetItem(i)
     Next i
     
 End Sub
@@ -61,16 +61,16 @@ End Sub
 Public Sub Clear()
 ' Removes all items of this array
 
-    Dim arr() As Variant
+    Dim arr() As Currency
     
     Me.SetItems arr
     
 End Sub
 
-Public Function Clone() As ArrayList
-' Copies this ArrayList by value
+Public Function Clone() As ArrayListCurrency
+' Copies this ArrayListCurrency by value
 
-    Dim arr As New ArrayList
+    Dim arr As New ArrayListCurrency
     
     arr.SetItems Me.ToArray
     
@@ -78,17 +78,17 @@ Public Function Clone() As ArrayList
     
 End Function
 
-Public Function Contains(ByVal Item As Variant) As Boolean
+Public Function Contains(ByVal item As Currency) As Boolean
 ' Returns <True> when <Item> occurs at least once inside this array
 
     Dim i As Long
     
     If Me.GetSize = 0 Then
-        Exit Sub
+        Exit Function
     End If
     
     For i = 0 To Me.GetSize
-        If Elements(i) = Item Then
+        If m_Items(i) = item Then
             Contains = True
             Exit Function
         End If
@@ -96,10 +96,10 @@ Public Function Contains(ByVal Item As Variant) As Boolean
     
 End Function
 
-Public Function GetItem(ByVal Index As Long) As Variant
+Public Function GetItem(ByVal index As Long) As Currency
 ' Returns the item at <Index> of this array
 
-    GetItem = Elements(Index)
+    GetItem = m_Items(index)
     
 End Function
 
@@ -107,7 +107,7 @@ Public Function GetSize() As Long
 ' Returns the count of items in this array
 
     On Error GoTo EmptyArray
-        GetSize = UBound(Elements) + 1
+        GetSize = UBound(m_Items) + 1
         Exit Function
     On Error GoTo 0
     
@@ -117,26 +117,26 @@ EmptyArray:
     
 End Function
 
-Public Function GetSubArrayList(Optional ByVal StartIndex As Long = 0, Optional ByVal EndIndex As Long = -1) As ArrayList
+Public Function GetSubArrayListCurrency(Optional ByVal startIndex As Long = 0, Optional ByVal endIndex As Long = -1) As ArrayListCurrency
 ' Returns the part from <StartIndex> (inclusive) to <EndIndex> (exclusive) of this array
 
-    Dim arr As New ArrayList
+    Dim arr As New ArrayListCurrency
     Dim i As Long
     
-    If EndIndex = -1 Then
-        EndIndex = Me.GetSize - 1
+    If endIndex = -1 Then
+        endIndex = Me.GetSize - 1
     End If
     
     ' Extract items
-    For i = StartIndex To EndIndex - 1
+    For i = startIndex To endIndex - 1
         arr.Add Me.GetItem(i)
     Next i
     
-    Set GetSubArrayList = arr
+    Set GetSubArrayListCurrency = arr
     
 End Function
 
-Public Function IndexOf(ByVal Item As Variant) As Long
+Public Function IndexOf(ByVal item As Currency) As Long
 ' Returns the index of the first occurence of <Item> in this array or -1 if this array does not contain <Item>
 
     Dim i As Long
@@ -147,7 +147,7 @@ Public Function IndexOf(ByVal Item As Variant) As Long
     End If
     
     For i = 0 To Me.GetSize - 1
-        If Me.GetItem(i) = Item Then
+        If Me.GetItem(i) = item Then
             IndexOf = i
             Exit Function
         End If
@@ -157,7 +157,7 @@ Public Function IndexOf(ByVal Item As Variant) As Long
     
 End Function
 
-Public Sub Remove(Optional ByVal Index As Long = -1)
+Public Sub Remove(Optional ByVal index As Long = -1)
 ' Removes item at <Index> (removes last item when no <Index> specified)
 
     Dim i As Long, size As Long
@@ -168,35 +168,35 @@ Public Sub Remove(Optional ByVal Index As Long = -1)
         Exit Sub
     End If
     
-    If Index = -1 Then Index = size - 1
+    If index = -1 Then index = size - 1
     
     ' Reposition items after <Index>
-    For i = Index To size - 2
-        Elements(i) = Elements(i + 1)
+    For i = index To size - 2
+        m_Items(i) = m_Items(i + 1)
     Next i
     
     ' Resize array
     If size = 0 Then
-        Dim arr() As Variant
+        Dim arr() As Currency
         Me.SetItems arr
     Else
-        ReDim Preserve Elements(size - 2)
+        ReDim Preserve m_Items(size - 2)
     End If
     
 End Sub
 
-Public Function RemoveAll(ByVal List As ArrayList) As Boolean
+Public Function RemoveAll(ByVal list As ArrayListCurrency) As Boolean
 ' Removes all items that are contained in <List> and returns <True> when at least one item has been removed
 
     Dim i As Long, j As Long
     
-    If Me.GetSize = 0 Or List.GetSize = 0 Then
-        Exit Sub
+    If Me.GetSize = 0 Or list.GetSize = 0 Then
+        Exit Function
     End If
     
     For i = Me.GetSize - 1 To 0 Step -1
-        For j = List.GetSize - 1 To 0 Step -1
-            If Me.GetItem(i) = List.GetItem(j) Then
+        For j = list.GetSize - 1 To 0 Step -1
+            If Me.GetItem(i) = list.GetItem(j) Then
                 Me.Remove i
                 RemoveAll = True
                 GoTo NextIteration
@@ -210,7 +210,7 @@ End Function
 Public Function RemoveDuplicates() As Boolean
 ' Removes all duplicate items and returns <True> when at least one item has been removed
 
-    Dim duplicates As New ArrayList
+    Dim duplicates As New ArrayListCurrency
     Dim i As Long, j As Long
     
     If Me.GetSize = 0 Then
@@ -234,42 +234,42 @@ Public Function RemoveDuplicates() As Boolean
     
 End Function
 
-Public Sub RemoveRange(Optional ByVal StartIndex As Long = 0, Optional ByVal EndIndex As Long = -1)
+Public Sub RemoveRange(Optional ByVal startIndex As Long = 0, Optional ByVal endIndex As Long = -1)
 ' Removes all items from <StartIndex> (inclusive) to <EndIndex> (exclusive) from this array
 
     Dim i As Long, size As Long, offset As Long, newSize As Long
     
     size = Me.GetSize
-    offset = EndIndex - StartIndex
+    offset = endIndex - startIndex
     
     ' Reposition items after <StartIndex>
-    For i = size - 1 To EndIndex Step -1
-        Elements(i - offset) = Elements(i)
+    For i = size - 1 To endIndex Step -1
+        m_Items(i - offset) = m_Items(i)
     Next i
     
     ' Resize array
     newSize = size - offset - 1
     If newSize >= 0 Then
-        ReDim Preserve Elements(newSize)
+        ReDim Preserve m_Items(newSize)
     Else
-        Dim arr() As Variant
+        Dim arr() As Currency
         Me.SetItems arr
     End If
     
 End Sub
 
-Public Function RetainAll(ByVal List As ArrayList) As Boolean
+Public Function RetainAll(ByVal list As ArrayListCurrency) As Boolean
 ' Removes all items that are not contained in <List> and returns <True> when at least one item has been removed
     
     Dim i As Long, j As Long
     
-    If Me.GetSize = 0 Or List.GetSize = 0 Then
-        Exit Sub
+    If Me.GetSize = 0 Or list.GetSize = 0 Then
+        Exit Function
     End If
     
     For i = Me.GetSize - 1 To 0 Step -1
-        For j = List.GetSize - 1 To 0 Step -1
-            If Me.GetItem(i) <> List.GetItem(j) Then
+        For j = list.GetSize - 1 To 0 Step -1
+            If Me.GetItem(i) <> list.GetItem(j) Then
                 Me.Remove i
                 RetainAll = True
                 GoTo NextIteration
@@ -283,7 +283,7 @@ End Function
 Public Sub Reverse()
 ' Reverses the order of the items in this array
 
-    Dim arr() As Variant
+    Dim arr() As Currency
     Dim i As Long, size As Long
     
     size = Me.GetSize
@@ -302,35 +302,35 @@ Public Sub Reverse()
     
 End Sub
 
-Public Sub SetItem(ByRef Item As Variant, Optional ByVal Index As Long = -1)
+Public Sub SetItem(ByRef item As Currency, Optional ByVal index As Long = -1)
 ' Replaces the item at <Index> with <Item> (last item if <Index> is not specified)
 
-    If Index = -1 Then
-        Index = Me.GetSize - 1
+    If index = -1 Then
+        index = Me.GetSize - 1
     End If
     
-    Elements(Index) = Item
+    m_Items(index) = item
     
 End Sub
 
-Public Sub SetItems(Items() As Variant)
+Public Sub SetItems(items() As Currency)
 ' Sets this array to <Items>
 
-    Elements = Items
+    m_Items = items
     
 End Sub
 
-Public Sub Sort(Optional ByVal Ascending As Boolean = True)
+Public Sub Sort(Optional ByVal ascending As Boolean = True)
 ' Sorts the items of this array
 
-    Dim temp As Variant
+    Dim temp As Currency
     Dim i As Long, j As Long
     
     If Me.GetSize <= 1 Then
         Exit Sub
     End If
     
-    If Ascending Then
+    If ascending Then
         For i = 0 To Me.GetSize - 2
             For j = i + 1 To Me.GetSize - 1
                 If Me.GetItem(i) > Me.GetItem(j) Then
@@ -354,9 +354,9 @@ Public Sub Sort(Optional ByVal Ascending As Boolean = True)
     
 End Sub
 
-Public Function ToArray() As Variant()
+Public Function ToArray() As Currency()
 ' Returns the array
 
-    ToArray = Elements
+    ToArray = m_Items
     
 End Function
