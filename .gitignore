@@ -1,4 +1,6 @@
 # File used to edit the library
-Code.xlsm
+/Code.xlsm
 # Temporary file (when file is still opened)
-~$Code.xlsm
+/~$Code.xlsm
+# Distribution folder for exported VBA code
+/dist/**
