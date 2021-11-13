@@ -8,6 +8,9 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
+' Variant impacts performances so the data type of <m_Items> should be changed (replace in whole class using ctrl + h)
+' Changing it to object does not work because assigning an object to a variable requires the keyword <set>
+' There is an extra class for that purpose
 
 Private m_Items() As Variant ' Array that stores all items
 

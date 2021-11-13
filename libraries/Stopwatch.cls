@@ -8,15 +8,17 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
+' Measures elapsed time in seconds
+' Can be started after being stopped (e.g. to exclude lines of code from the time measurement)
 
 Private m_StartTime As Single
-Private m_RunTime As Single
+Private m_Elapsedtime As Single
 Private m_IsRunning As Boolean
 
-Public Function GetRunTime() As Single
-' Returns the actual time this timer was running
+Public Function GetElapsedTime() As Single
+' Returns the actual time this timer was Elapsedning
 
-    GetRunTime = m_RunTime
+    GetElapsedTime = m_Elapsedtime
     
 End Function
 
@@ -26,13 +28,6 @@ Public Function GetStartTime() As Single
     GetStartTime = m_StartTime
     
 End Function
-
-Public Sub SetStartTime(Value As Single)
-' Sets the <m_StartTime>
-
-    m_StartTime = Value
-    
-End Sub
 
 Public Sub Start()
 ' Starts the stopwatch
@@ -45,24 +40,24 @@ Public Sub Start()
 End Sub
 
 Public Sub Pause()
-' Stores the current time in <m_EndTime> and <m_StartTime>
+' Stores the current time in <m_StartTime>
 
     If m_IsRunning Then
-        m_RunTime = m_RunTime + Timer - m_StartTime
+        m_Elapsedtime = m_Elapsedtime + Timer - m_StartTime
         m_IsRunning = False
     End If
     
 End Sub
 
-Public Sub PrintRunTime()
-' Prints the current run time to the console
+Public Sub PrintElapsedtime()
+' Prints the current <m_Elapsedtime> to the console
 
     Dim temp As Single
     
     If m_IsRunning Then
-        temp = m_RunTime + Timer - m_StartTime
+        temp = m_Elapsedtime + Timer - m_StartTime
     Else
-        temp = m_RunTime
+        temp = m_Elapsedtime
     End If
     
     Debug.Print Format(temp, "0.000"" s""")

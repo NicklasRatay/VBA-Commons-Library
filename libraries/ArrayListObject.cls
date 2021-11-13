@@ -8,6 +8,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
+' Changing the data type of <m_Items> to a specific class does not improve performance
 
 Private m_Items() As Object ' Array that stores all items
 
