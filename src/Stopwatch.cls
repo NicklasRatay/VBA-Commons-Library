@@ -15,22 +15,22 @@ Private m_StartTime As Single
 Private m_Elapsedtime As Single
 Private m_IsRunning As Boolean
 
+' Returns the actual time this timer was running
 Public Function GetElapsedTime() As Single
-' Returns the actual time this timer was Elapsedning
 
     GetElapsedTime = m_Elapsedtime
     
 End Function
 
-Public Function GetStartTime() As Single
 ' Returns the stored <m_StartTime>
+Public Function GetStartTime() As Single
 
     GetStartTime = m_StartTime
     
 End Function
 
-Public Sub Start()
 ' Starts the stopwatch
+Public Sub Start()
 
     If Not m_IsRunning Then
         m_StartTime = Timer
@@ -39,8 +39,8 @@ Public Sub Start()
     
 End Sub
 
-Public Sub Pause()
 ' Stores the current time in <m_StartTime>
+Public Sub Pause()
 
     If m_IsRunning Then
         m_Elapsedtime = m_Elapsedtime + Timer - m_StartTime
@@ -49,8 +49,8 @@ Public Sub Pause()
     
 End Sub
 
-Public Sub PrintElapsedtime()
 ' Prints the current <m_Elapsedtime> to the console
+Public Sub PrintElapsedtime()
 
     Dim temp As Single
     

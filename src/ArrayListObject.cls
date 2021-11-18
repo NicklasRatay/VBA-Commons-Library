@@ -8,12 +8,13 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = False
 Attribute VB_Exposed = False
 Option Explicit
+' Offers general-purpose functionality for array handling
 ' Changing the data type of <m_Items> to a specific class does not improve performance
 
 Private m_Items() As Object ' Array that stores all items
 
+' Adds an <item> to this array (at <index> if specified)
 Public Sub Add(ByRef item As Object, Optional ByVal index As Long = -1)
-' Adds an <Item> to this array (at <Index> if specified)
 
     Dim i As Long, size As Long
     
@@ -29,12 +30,12 @@ Public Sub Add(ByRef item As Object, Optional ByVal index As Long = -1)
         Set m_Items(i) = m_Items(i - 1)
     Next i
     
-    Set m_Items(index) = item ' Set value at <Index> to <Item>
+    Set m_Items(index) = item ' Set value at <index> to <item>
     
 End Sub
 
-Public Sub AddAll(ByVal list As ArrayListObject, Optional ByVal index As Long = -1)
 ' Adds all items of <ArrayListObject> to this array
+Public Sub AddAll(ByVal list As ArrayListObject, Optional ByVal index As Long = -1)
 
     Dim i As Long, ownSize As Long, otherSize As Long
     
@@ -59,8 +60,8 @@ Public Sub AddAll(ByVal list As ArrayListObject, Optional ByVal index As Long = 
     
 End Sub
 
-Public Sub Clear()
 ' Removes all items of this array
+Public Sub Clear()
 
     Dim arr() As Object
     
@@ -68,8 +69,8 @@ Public Sub Clear()
     
 End Sub
 
-Public Function Clone() As ArrayListObject
 ' Copies this ArrayListObject by value
+Public Function Clone() As ArrayListObject
 
     Dim arr As New ArrayListObject
     
@@ -79,8 +80,8 @@ Public Function Clone() As ArrayListObject
     
 End Function
 
+' Returns <True> when <item> occurs at least once inside this array
 Public Function Contains(ByVal item As Object) As Boolean
-' Returns <True> when <Item> occurs at least once inside this array
 
     Dim i As Long
     
@@ -97,15 +98,15 @@ Public Function Contains(ByVal item As Object) As Boolean
     
 End Function
 
+' Returns the item at <index> of this array
 Public Function GetItem(ByVal index As Long) As Object
-' Returns the item at <Index> of this array
 
     GetItem = m_Items(index)
     
 End Function
 
-Public Function GetSize() As Long
 ' Returns the count of items in this array
+Public Function GetSize() As Long
 
     On Error GoTo EmptyArray
         GetSize = UBound(m_Items) + 1
@@ -118,8 +119,8 @@ EmptyArray:
     
 End Function
 
+' Returns the part from <startIndex> (inclusive) to <endIndex> (exclusive) of this array
 Public Function GetSubArrayListObject(Optional ByVal startIndex As Long = 0, Optional ByVal endIndex As Long = -1) As ArrayListObject
-' Returns the part from <StartIndex> (inclusive) to <EndIndex> (exclusive) of this array
 
     Dim arr As New ArrayListObject
     Dim i As Long
@@ -137,8 +138,8 @@ Public Function GetSubArrayListObject(Optional ByVal startIndex As Long = 0, Opt
     
 End Function
 
+' Returns the index of the first occurence of <item> in this array or -1 if this array does not contain <item>
 Public Function IndexOf(ByVal item As Object) As Long
-' Returns the index of the first occurence of <Item> in this array or -1 if this array does not contain <Item>
 
     Dim i As Long
     
@@ -158,8 +159,8 @@ Public Function IndexOf(ByVal item As Object) As Long
     
 End Function
 
+' Removes item at <index> (removes last item when no <index> specified)
 Public Sub Remove(Optional ByVal index As Long = -1)
-' Removes item at <Index> (removes last item when no <Index> specified)
 
     Dim i As Long, size As Long
     
@@ -186,8 +187,8 @@ Public Sub Remove(Optional ByVal index As Long = -1)
     
 End Sub
 
+' Removes all items that are contained in <list> and returns <True> when at least one item has been removed
 Public Function RemoveAll(ByVal list As ArrayListObject) As Boolean
-' Removes all items that are contained in <List> and returns <True> when at least one item has been removed
 
     Dim i As Long, j As Long
     
@@ -208,8 +209,8 @@ NextIteration:
     
 End Function
 
-Public Function RemoveDuplicates() As Boolean
 ' Removes all duplicate items and returns <True> when at least one item has been removed
+Public Function RemoveDuplicates() As Boolean
 
     Dim duplicates As New ArrayListObject
     Dim i As Long, j As Long
@@ -235,8 +236,8 @@ Public Function RemoveDuplicates() As Boolean
     
 End Function
 
+' Removes all items from <startIndex> (inclusive) to <endIndex> (exclusive) from this array
 Public Sub RemoveRange(Optional ByVal startIndex As Long = 0, Optional ByVal endIndex As Long = -1)
-' Removes all items from <StartIndex> (inclusive) to <EndIndex> (exclusive) from this array
 
     Dim i As Long, size As Long, offset As Long, newSize As Long
     
@@ -259,8 +260,8 @@ Public Sub RemoveRange(Optional ByVal startIndex As Long = 0, Optional ByVal end
     
 End Sub
 
+' Removes all items that are not contained in <list> and returns <True> when at least one item has been removed
 Public Function RetainAll(ByVal list As ArrayListObject) As Boolean
-' Removes all items that are not contained in <List> and returns <True> when at least one item has been removed
     
     Dim i As Long, j As Long
     
@@ -281,8 +282,8 @@ NextIteration:
     
 End Function
 
-Public Sub Reverse()
 ' Reverses the order of the items in this array
+Public Sub Reverse()
 
     Dim arr() As Object
     Dim i As Long, size As Long
@@ -303,8 +304,8 @@ Public Sub Reverse()
     
 End Sub
 
+' Replaces the item at <index> with <item> (last item if <index> is not specified)
 Public Sub SetItem(ByRef item As Object, Optional ByVal index As Long = -1)
-' Replaces the item at <Index> with <Item> (last item if <Index> is not specified)
 
     If index = -1 Then
         index = Me.GetSize - 1
@@ -314,15 +315,15 @@ Public Sub SetItem(ByRef item As Object, Optional ByVal index As Long = -1)
     
 End Sub
 
+' Sets the intern array to <items>
 Public Sub SetItems(items() As Object)
-' Sets this array to <Items>
 
     Set m_Items = items
     
 End Sub
 
-Public Sub Sort(Optional ByVal ascending As Boolean = True)
 ' Sorts the items of this array
+Public Sub Sort(Optional ByVal ascending As Boolean = True)
 
     Dim temp As Object
     Dim i As Long, j As Long
@@ -355,8 +356,8 @@ Public Sub Sort(Optional ByVal ascending As Boolean = True)
     
 End Sub
 
+' Returns the intern array
 Public Function ToArray() As Object()
-' Returns the array
 
     ToArray = m_Items
     
