@@ -1,19 +1,26 @@
 Attribute VB_Name = "ModuleManager"
 Option Explicit
 
-Private Sub ExportAll()
 ' Exports all classes, forms and modules of this VBProject into a "dist" folder inside the parent folder of this workbook
+Private Sub ExportAll()
 
+    Dim fso As Object
     Dim component As Object
     Dim components As Object
     Dim ext As String
-    Dim path As String
+    Dim Path As String
     
     On Error GoTo TrustCenterIssue
-        Set components = ThisWorkbook.VBProject.VBComponents
+        Set components = ThisWorkbook.VBProject.VBComponents ' Throws exception if trust center does not trust programmatic access
     On Error GoTo 0
     
-    path = CreateExportDir
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    
+    Path = ThisWorkbook.Path & "\dist"
+    
+    If Not fso.FolderExists(Path) Then
+        fso.CreateFolder Path
+    End If
     
     For Each component In components
         Select Case component.Type
@@ -26,9 +33,11 @@ Private Sub ExportAll()
             Case Else
                 GoTo NextIteration
         End Select
-        component.Export path & "\" & component.Name & ext
+        component.Export Path & "\" & component.Name & ext
 NextIteration:
     Next component
+    
+    Set fso = Nothing
     
     Exit Sub
     
@@ -45,23 +54,3 @@ TrustCenterIssue:
         vbCritical, "Error"
     
 End Sub
-
-Private Function CreateExportDir() As String
-' Creates folder for export
-
-    Dim fso As Object
-    Dim path As String
-    
-    Set fso = CreateObject("Scripting.FileSystemObject")
-    
-    path = ThisWorkbook.path & "\dist"
-    
-    If Not fso.FolderExists(path) Then
-        fso.CreateFolder path
-    End If
-    
-    Set fso = Nothing
-    
-    CreateExportDir = path
-    
-End Function
