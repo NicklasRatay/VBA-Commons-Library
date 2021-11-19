@@ -10,13 +10,13 @@ Attribute VB_Exposed = False
 Option Explicit
 ' Offers general-purpose functionality for array handling
 ' Variant impacts performances so the data type of <m_Items> should be changed (replace in whole class using ctrl + h)
-' Changing it to object does not work because assigning an object to a variable requires the keyword <set>
+' Changing it to Variant does not work because assigning an Variant to a variable requires the keyword <set>
 ' There is an extra class for that purpose
 
-Private m_Items() As Object ' Array that stores all items
+Private m_Items() As Variant ' Array that stores all items
 
 ' Adds an <item> to this array (at <index> if specified)
-Public Sub Add(ByRef item As Object, Optional ByVal index As Long = -1)
+Public Sub Add(ByRef item As Variant, Optional ByVal index As Long = -1)
 
     Dim i As Long, size As Long
     
@@ -36,13 +36,13 @@ Public Sub Add(ByRef item As Object, Optional ByVal index As Long = -1)
     
 End Sub
 
-' Adds all items of <ArrayListObject> to this array
-Public Sub AddAll(ByVal list As ArrayListObject, Optional ByVal index As Long = -1)
+' Adds all items of <ArrayListVariant> to this array
+Public Sub AddAll(ByVal list As ArrayListVariant, Optional ByVal index As Long = -1)
 
     Dim i As Long, ownSize As Long, otherSize As Long
     
     ownSize = Me.GetSize
-    otherSize = ArrayListObject.GetSize
+    otherSize = list.GetSize
     
     If index = -1 Then
         index = ownSize
@@ -55,9 +55,9 @@ Public Sub AddAll(ByVal list As ArrayListObject, Optional ByVal index As Long = 
         m_Items(i) = m_Items(i - otherSize)
     Next i
     
-    ' Inserts items of <ArrayListObject>
+    ' Inserts items of <ArrayListVariant>
     For i = 0 To otherSize - 1
-        m_Items(i + index) = ArrayListObject.GetItem(i)
+        m_Items(i + index) = list.GetItem(i)
     Next i
     
 End Sub
@@ -65,16 +65,16 @@ End Sub
 ' Removes all items of this array
 Public Sub Clear()
 
-    Dim arr() As Object
+    Dim arr() As Variant
     
     Me.SetItems arr
     
 End Sub
 
-' Copies this ArrayListObject by value
-Public Function Clone() As ArrayListObject
+' Copies this ArrayListVariant by value
+Public Function Clone() As ArrayListVariant
 
-    Dim arr As New ArrayListObject
+    Dim arr As New ArrayListVariant
     
     arr.SetItems Me.ToArray
     
@@ -83,7 +83,7 @@ Public Function Clone() As ArrayListObject
 End Function
 
 ' Returns <True> when <item> occurs at least once inside this array
-Public Function Contains(ByVal item As Object) As Boolean
+Public Function Contains(ByVal item As Variant) As Boolean
 
     Dim i As Long
     
@@ -101,7 +101,7 @@ Public Function Contains(ByVal item As Object) As Boolean
 End Function
 
 ' Returns the item at <index> of this array
-Public Function GetItem(ByVal index As Long) As Object
+Public Function GetItem(ByVal index As Long) As Variant
 
     GetItem = m_Items(index)
     
@@ -122,9 +122,9 @@ EmptyArray:
 End Function
 
 ' Returns the part from <startIndex> (inclusive) to <endIndex> (exclusive) of this array
-Public Function GetSubArrayListObject(Optional ByVal startIndex As Long = 0, Optional ByVal endIndex As Long = -1) As ArrayListObject
+Public Function GetSubArrayListVariant(Optional ByVal startIndex As Long = 0, Optional ByVal endIndex As Long = -1) As ArrayListVariant
 
-    Dim arr As New ArrayListObject
+    Dim arr As New ArrayListVariant
     Dim i As Long
     
     If endIndex = -1 Then
@@ -136,12 +136,12 @@ Public Function GetSubArrayListObject(Optional ByVal startIndex As Long = 0, Opt
         arr.Add Me.GetItem(i)
     Next i
     
-    GetSubArrayListObject = arr
+    GetSubArrayListVariant = arr
     
 End Function
 
 ' Returns the index of the first occurence of <item> in this array or -1 if this array does not contain <item>
-Public Function IndexOf(ByVal item As Object) As Long
+Public Function IndexOf(ByVal item As Variant) As Long
 
     Dim i As Long
     
@@ -181,7 +181,7 @@ Public Sub Remove(Optional ByVal index As Long = -1)
     
     ' Resize array
     If size = 0 Then
-        Dim arr() As Object
+        Dim arr() As Variant
         Me.SetItems arr
     Else
         ReDim Preserve m_Items(size - 2)
@@ -190,7 +190,7 @@ Public Sub Remove(Optional ByVal index As Long = -1)
 End Sub
 
 ' Removes all items that are contained in <list> and returns <True> when at least one item has been removed
-Public Function RemoveAll(ByVal list As ArrayListObject) As Boolean
+Public Function RemoveAll(ByVal list As ArrayListVariant) As Boolean
 
     Dim i As Long, j As Long
     
@@ -214,7 +214,7 @@ End Function
 ' Removes all duplicate items and returns <True> when at least one item has been removed
 Public Function RemoveDuplicates() As Boolean
 
-    Dim duplicates As New ArrayListObject
+    Dim duplicates As New ArrayListVariant
     Dim i As Long, j As Long
     
     If Me.GetSize = 0 Then
@@ -256,14 +256,14 @@ Public Sub RemoveRange(Optional ByVal startIndex As Long = 0, Optional ByVal end
     If newSize >= 0 Then
         ReDim Preserve m_Items(newSize)
     Else
-        Dim arr() As Object
+        Dim arr() As Variant
         Me.SetItems arr
     End If
     
 End Sub
 
 ' Removes all items that are not contained in <list> and returns <True> when at least one item has been removed
-Public Function RetainAll(ByVal list As ArrayListObject) As Boolean
+Public Function RetainAll(ByVal list As ArrayListVariant) As Boolean
     
     Dim i As Long, j As Long
     
@@ -287,7 +287,7 @@ End Function
 ' Reverses the order of the items in this array
 Public Sub Reverse()
 
-    Dim arr() As Object
+    Dim arr() As Variant
     Dim i As Long, size As Long
     
     size = Me.GetSize
@@ -307,7 +307,7 @@ Public Sub Reverse()
 End Sub
 
 ' Replaces the item at <index> with <item> (last item if <index> is not specified)
-Public Sub SetItem(ByRef item As Object, Optional ByVal index As Long = -1)
+Public Sub SetItem(ByRef item As Variant, Optional ByVal index As Long = -1)
 
     If index = -1 Then
         index = Me.GetSize - 1
@@ -318,7 +318,7 @@ Public Sub SetItem(ByRef item As Object, Optional ByVal index As Long = -1)
 End Sub
 
 ' Sets the intern array to <items>
-Public Sub SetItems(items() As Object)
+Public Sub SetItems(items() As Variant)
 
     m_Items = items
     
@@ -327,7 +327,7 @@ End Sub
 ' Sorts the items of this array
 Public Sub Sort(Optional ByVal ascending As Boolean = True)
 
-    Dim temp As Object
+    Dim temp As Variant
     Dim i As Long, j As Long
     
     If Me.GetSize <= 1 Then
@@ -359,7 +359,7 @@ Public Sub Sort(Optional ByVal ascending As Boolean = True)
 End Sub
 
 ' Returns the intern array
-Public Function ToArray() As Object()
+Public Function ToArray() As Variant()
 
     ToArray = m_Items
     

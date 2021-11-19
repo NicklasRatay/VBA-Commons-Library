@@ -40,7 +40,7 @@ Public Sub AddAll(ByVal list As ArrayListObject, Optional ByVal index As Long = 
     Dim i As Long, ownSize As Long, otherSize As Long
     
     ownSize = Me.GetSize
-    otherSize = ArrayListObject.GetSize
+    otherSize = list.GetSize
     
     If index = -1 Then
         index = ownSize
@@ -55,7 +55,7 @@ Public Sub AddAll(ByVal list As ArrayListObject, Optional ByVal index As Long = 
     
     ' Inserts items of <ArrayListObject>
     For i = 0 To otherSize - 1
-        Set m_Items(i + index) = ArrayListObject.GetItem(i)
+        Set m_Items(i + index) = list.GetItem(i)
     Next i
     
 End Sub
