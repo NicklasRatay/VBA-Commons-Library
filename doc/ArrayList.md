@@ -1,9 +1,9 @@
-﻿# Description
+# Description
+These classes provide quality of life features for dealing with arrays like automatic resizing and advanced functions like sorting or reversing the elements.
+
 There are two ArrayList classes due to the fact that the compiler requires the use of slightly different syntax when dealing with objects instead of primitive data types. 
   - [ArrayListObject](https://github.com/NicklasRatay/VBA-Library/tree/main/src/ArrayListObject.cls) for handling objects
   - [ArrayListVariant](https://github.com/NicklasRatay/VBA-Library/tree/main/src/ArrayListVariant) for handling primitive data types
-
-These classes provide quality of life features for dealing with arrays like automatic resizing and advanced functions like sorting or reversing the elements.
 # Performance Notice
   - ArrayListObject: This class accepts every kind of object and changing the data type of the internal array to a specific class does not improve performance. Therefore it can be used as it is for all types of objects without impacting runtime.   
 
