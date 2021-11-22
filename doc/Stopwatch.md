@@ -1,6 +1,7 @@
 ﻿# Description
 This class provides functionality to measure time in a more convenient way and is mainly intended for debugging. For example it can be used to measure the time a certain block of code needs to be executed and print the result to the console.
 All methods can be used while the *Stopwatch* is running or not.
+  - [Stopwatch](https://github.com/NicklasRatay/VBA-Library/tree/main/src/Stopwatch.cls)
 # Methods
  - [GetElapsedTime](#getelapsedtime)
  - [IsRunning](#isrunning)
