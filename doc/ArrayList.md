@@ -13,6 +13,7 @@ It is advised to change the data type of the internal array of this class if hea
 # Methods
  - [Add](#add)
  - [AddAll](#addall)
+ - [AddArray](#addarray)
  - [Clear](#clear)
  - [Clone](#clone)
  - [Contains](#contains)
@@ -53,7 +54,7 @@ arr.PrintItems
 ' 2: Item2
 ```
 ## AddAll
-This adds all items of a second *ArrayList* to this *ArrayList*. If no `index` is specified they are added at the end.
+This adds all items of `list` to this *ArrayList*. If no `index` is specified they are added at the end.
  - Parameters
 	 - `list` As `ArrayList<Type>` and `ByVal`
 	 - `index` As `Long` and `ByVal`
@@ -75,6 +76,33 @@ arr2.PrintItems
 ' 0: Item1
 ' 1: Item2
 ' 2: Item3
+```
+## AddArray
+This adds all items of `list` to this *ArrayList*. If no `index` is specified they are added at the end.
+ - Parameters
+	 - `list` As `<Type>()` and `ByRef`
+	 - `index` As `Long` and `ByVal`
+ - Returns
+	 - Nothing
+
+Example Code:
+```vba
+Dim arr1 As New ArrayListVariant
+Dim arr2() As Variant
+    
+arr1.Add "Item1"
+arr1.Add "Item2"
+    
+arr2 = Array("Item3", "Item4", "Item5")
+    
+arr1.AddArray arr2
+    
+arr1.PrintItems
+' 0: Item1
+' 1: Item2
+' 2: Item3
+' 3: Item4
+' 4: Item5
 ```
 ## Clear
 Removes all items from this *ArrayList*.

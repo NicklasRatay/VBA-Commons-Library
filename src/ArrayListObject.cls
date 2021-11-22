@@ -34,7 +34,7 @@ Public Sub Add(ByRef item As Object, Optional ByVal index As Long = -1)
     
 End Sub
 
-' Adds all items of <ArrayListObject> to this array
+' Adds all items of <list> to this array
 Public Sub AddAll(ByVal list As ArrayListObject, Optional ByVal index As Long = -1)
 
     Dim i As Long, ownSize As Long, otherSize As Long
@@ -56,6 +56,34 @@ Public Sub AddAll(ByVal list As ArrayListObject, Optional ByVal index As Long = 
     ' Inserts items of <ArrayListObject>
     For i = 0 To otherSize - 1
         Set m_Items(i + index) = list.GetItem(i)
+    Next i
+    
+End Sub
+
+' Adds all items of <list> to this array
+Public Sub AddArray(ByRef list() As Object, Optional ByVal index As Long = -1)
+
+    Dim i As Long, s As Long, e As Long, ownSize As Long, otherSize As Long
+    
+    ownSize = Me.Size
+    s = LBound(list)
+    e = UBound(list)
+    otherSize = e - s + 1
+    
+    If index = -1 Then
+        index = ownSize
+    End If
+    
+    ReDim Preserve m_Items(ownSize + otherSize - 1)
+    
+    ' Reposition items after <Index>
+    For i = ownSize + otherSize - 1 To index + otherSize Step -1
+        Set m_Items(i) = m_Items(i - otherSize)
+    Next i
+    
+    ' Inserts items of <ArrayListVariant>
+    For i = 0 To otherSize - 1
+        Set m_Items(i + index) = list(i)
     Next i
     
 End Sub
