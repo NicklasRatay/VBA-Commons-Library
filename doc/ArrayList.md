@@ -1,4 +1,4 @@
-# Description
+﻿# Description
 These classes provide quality of life features for dealing with arrays like automatic resizing and advanced functions like sorting or reversing the elements.
 
 There are two ArrayList classes due to the fact that the compiler requires the use of slightly different syntax when dealing with objects instead of primitive data types. 
