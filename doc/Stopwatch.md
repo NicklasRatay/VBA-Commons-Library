@@ -89,7 +89,7 @@ watch.Start
 ## PrintElapsedTime
 Prints the total elapsed time of this *Stopwatch* in seconds to the console including a `message`. If no `message` is specified it just prints the time.
  - Parameters
-	 - `message` As `String` and `ByVal`
+	 - `message` As `String` and `ByVal` with default of `""`
  - Returns
 	 - Nothing
 
