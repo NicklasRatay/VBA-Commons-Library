@@ -11,6 +11,26 @@ These classes provide quality of life features for dealing with arrays like auto
 It is advised to change the data type of the internal array of this class if heavy workload is expected. This can be done by simply replacing the keyword `Variant` within the whole class module with the needed data type (Shortcut: `ctrl + h`) and renaming the class accordingly. An *ArrayList* class of type `String` for example should be named *ArrayListString*.
 
 # Methods
+ - [Add](#add)
+ - [AddAll](#addall)
+ - [Clear](#clear)
+ - [Clone](#clone)
+ - [Contains](#contains)
+ - [GetItem](#getitem)
+ - [IndexOf](#indexof)
+ - [PrintItems](#printitems)
+ - [Remove](#remove)
+ - [RemoveAll](#removeall)
+ - [RemoveDuplicates](#removeduplicates)
+ - [RemoveRange](#removerange)
+ - [RetainAll](#retainall)
+ - [Reverse](#reverse)
+ - [SetItem](#setitem)
+ - [SetItems](#setitems)
+ - [Size](#size)
+ - [Sort](#sort)
+ - [SubList](#sublist)
+ - [ToArray](#toarray)
 ## Add
 This adds an item to this *ArrayList*. If no `index` is specified it is added at the end.
  - Parameters
