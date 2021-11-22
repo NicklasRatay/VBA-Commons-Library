@@ -1,11 +1,29 @@
 ﻿# Description
-This class provides a method to easily export all modules, classes and forms of a VBA-project. To use the method it simply has to be run from the Visual Basic Editor using `F5` while the selection-cursor is inside the method code.
-  - [ModuleManager](https://github.com/NicklasRatay/VBA-Library/tree/main/src/ModuleManager.bas)
+This form provides easy access to a stand-alone progress bar that is useful for displaying progress of time consuming loops for example.
+  - [ProgressBar](https://github.com/NicklasRatay/VBA-Library/tree/main/src/ProgressBar.frm)
 # Methods
- - [ExportAll](#exportall)
-## ExportAll
-Exports all modules, classes and forms of the VBA-project this method is run in. Creates a `.\dist` directory if not already existent to store the exports in. Special modules like the workbook module for example are ignored.
+ - [Update](#update)
+## Update
+Calculates percentage of completion and repaints the form accordingly using a custom `message` as well. If `message` is not specified no text is displayed above the progress bar.
  - Parameters
-	 - None
+	 - `current` As `Long` and `ByVal`
+	 - `max` As `Long` and `ByVal`
+	 - `message` As `String` and `ByVal` with default of `""`
  - Returns
 	 - Nothing
+
+Example Code:
+```vba
+Dim i As Integer, max As Integer
+
+max = 10000
+
+ProgressBar.Show
+
+For i = 0 To max
+	' Some code
+	ProgressBar.Update i, max, "Operation " & i & " from " & max
+Next i
+
+Unload ProgressBar
+```
