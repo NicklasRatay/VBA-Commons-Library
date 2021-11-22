@@ -36,7 +36,7 @@ It is advised to change the data type of the internal array of this class if hea
 This adds an item to this *ArrayList*. If no `index` is specified it is added at the end.
  - Parameters
 	 - `item` As `<Type>` and `ByRef`
-	 - `index` As `Long` and `ByVal`
+	 - `index` As `Long` and `ByVal` with default of `-1`
  - Returns
 	 - Nothing
 
@@ -57,7 +57,7 @@ arr.PrintItems
 This adds all items of `list` to this *ArrayList*. If no `index` is specified they are added at the end.
  - Parameters
 	 - `list` As `ArrayList<Type>` and `ByVal`
-	 - `index` As `Long` and `ByVal`
+	 - `index` As `Long` and `ByVal` with default of `-1`
  - Returns
 	 - Nothing
 
@@ -86,7 +86,7 @@ arr2.PrintItems
 This adds all items of `list` to this *ArrayList*. If no `index` is specified they are added at the end.
  - Parameters
 	 - `list` As `<Type>()` and `ByRef`
-	 - `index` As `Long` and `ByVal`
+	 - `index` As `Long` and `ByVal` with default of `-1`
  - Returns
 	 - Nothing
 
@@ -244,7 +244,7 @@ arr.PrintItems
 ## Remove
 Returns and then deletes an item from this *ArrayList*. If no `index` is specified the last item is removed.
  - Parameters
-	 - `index` As `Long` and `ByVal`
+	 - `index` As `Long` and `ByVal` with default of `-1`
  - Returns
 	 - `<Type>`
 
@@ -327,8 +327,8 @@ arr.PrintItems
 ## RemoveRange
 Deletes and returns all items from `startIndex` (inclusive) to `endIndex` (exclusive) of this *ArrayList*. If no `startIndex` is specified it is set to 0. If no `endIndex` is specified it is set to the last index of this *ArrayList*.
  - Parameters
-	 - `startIndex` As `Long` and `ByVal`
-	 - `endIndex` As `Long` and `ByVal`
+	 - `startIndex` As `Long` and `ByVal` with default of `0`
+	 - `endIndex` As `Long` and `ByVal` with default of `-1`
  - Returns
 	 - `ArrayList<Type>`
 
@@ -411,7 +411,7 @@ arr.PrintItems
 Replaces the item at `index` with `item`. If no `index` is specified the last item is replaced.
  - Parameters
 	 - `item` As `<Type>` and `ByRef`
-	 - `index` As `Long` and `ByVal`
+	 - `index` As `Long` and `ByVal` with default of `-1`
  - Returns
 	 - Nothing
 
@@ -478,7 +478,7 @@ Debug.Print arr.Size
 Sorts the items of this *ArrayList* using the build-in comparison functionality of VBA. Strings are sorted alphabetically while numbers are sorted by their value for example. If `ascending` is set to `True` the items are sorted in ascending order. If set to `False` they are sorted in descending order. If `ascending` is not specified it is set to `True`.
 This method is only available for the *ArrayListVariant* class and its derivatives created by the user because only primitive data types can be relationally compared in VBA.
  - Parameters
-	 - None
+	 - `ascending` As `Boolean` and `ByVal` with default of `True`
  - Returns
 	 - Nothing
 
