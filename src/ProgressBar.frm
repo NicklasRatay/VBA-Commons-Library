@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} ProgressBar 
    Caption         =   "Please wait..."
-   ClientHeight    =   600
+   ClientHeight    =   840
    ClientLeft      =   120
    ClientTop       =   465
    ClientWidth     =   3720
@@ -18,10 +18,11 @@ Option Explicit
 Const PROGRESS_BAR_WIDTH As Integer = 168
 
 ' Updates progress bar
-Public Sub UpdateProgressBar(ByVal CurrentValue As Long, ByVal MaxValue As Long)
+Public Sub Update(ByVal current As Long, ByVal max As Long, Optional ByVal message As String = "")
 
-    Me.lblFront.Width = PROGRESS_BAR_WIDTH * (CurrentValue / MaxValue)
-    Me.lblPercentage.Caption = Round(100 * (CurrentValue / MaxValue)) & " %"
-    Me.Repaint
+    lblFront.Width = PROGRESS_BAR_WIDTH * (current / max)
+    lblPercentage.Caption = Round(100 * (current / max)) & " %"
+    lblMessage.Caption = message
+    Repaint
 
 End Sub
