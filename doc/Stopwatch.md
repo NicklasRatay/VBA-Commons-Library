@@ -8,7 +8,7 @@ All methods can be used while the *Stopwatch* is running or not.
  - [Pause](#pause)
  - [PrintElapsedTime](#printelapsedtime)
 ## GetElapsedTime
-Returns the total time this *Stopwatch* has been running.
+Returns the total time this *Stopwatch* has been running in seconds.
  - Parameters
 	 - None
  - Returns
@@ -86,7 +86,7 @@ watch.Start
 ' Some code that is measured
 ```
 ## PrintElapsedTime
-Prints the total elapsed time of this *Stopwatch* to the console including a `message`. If no `message` is specified prints just the total elapsed time.
+Prints the total elapsed time of this *Stopwatch* in seconds to the console including a `message`. If no `message` is specified it just prints the time.
  - Parameters
 	 - `message` As `String` and `ByVal`
  - Returns
