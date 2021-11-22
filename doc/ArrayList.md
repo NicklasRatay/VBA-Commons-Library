@@ -68,7 +68,10 @@ Dim arr2 As New ArrayListVariant
 
 arr1.Add "Item1"
 arr1.Add "Item2"
-arr1.Add "Item3"
+
+arr2.Add "Item3"
+arr2.Add "Item4"
+arr2.Add "Item5"
 
 arr2.AddAll arr1
 
@@ -76,6 +79,8 @@ arr2.PrintItems
 ' 0: Item1
 ' 1: Item2
 ' 2: Item3
+' 3: Item4
+' 4: Item5
 ```
 ## AddArray
 This adds all items of `list` to this *ArrayList*. If no `index` is specified they are added at the end.
