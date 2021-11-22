@@ -64,12 +64,13 @@ Replaces all occurrences of `pattern` in `expression` with `replacement` and ret
 
 Example Code:
 ```vba
-Dim expression As String, pattern As String
+Dim expression As String, pattern As String, replacement As String
 Dim i As Integer
 
 expression = "This is a test message!"
-pattern = "\sis\s" ' Letters "is" isolated by white space characters
+pattern = "\sis\s" ' "is" isolated by white space characters
+replacement = " was "
 
-Debug.Print RegEx.ReplaceAll(expression, pattern, " was ", True)
+Debug.Print RegEx.ReplaceAll(expression, pattern, replacement, True)
 ' This was a test message!
 ```
