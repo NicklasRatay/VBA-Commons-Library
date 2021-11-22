@@ -1,5 +1,6 @@
 ﻿# Description
 This class provides a method to easily export all modules, classes and frames of a VBA-project. To use the method it simply has to be run from the Visual Basic Editor using `F5` while the selection-cursor is inside the method code.
+  - [ModuleManager](https://github.com/NicklasRatay/VBA-Library/tree/main/src/ModuleManager.bas)
 # Methods
  - [ExportAll](#exportall)
 ## ExportAll
