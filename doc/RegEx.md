@@ -1,5 +1,6 @@
 ﻿# Description
 This class provides convenient access to basic functions using regular expressions. Serves as an interface for the build-in *"VBScript.RegExp"*.
+  - [RegEx](https://github.com/NicklasRatay/VBA-Library/tree/main/src/RegEx.bas)
 # Methods
  - [GetMatches](#getmatches)
  - [IsMatch](#ismatch)
