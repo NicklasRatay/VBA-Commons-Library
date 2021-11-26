@@ -10,7 +10,7 @@ Valid string representations of a path:
  - "."
  - ".\."
 
-This class makes use of `ThisWorkbook.Path` to get the current working directory or its parent directory. To use this class inside other applications like *Word* or *Access* every occurrence of `ThisWorkbook.Path` in this class has to be replaced accordingly (`CTRL + H`).
+This class makes use of `ThisWorkbook.Path` to get the current working directory or its parent directory. To use this class inside other applications like *Word* or *Access* every occurrence of `ThisWorkbook.Path` in this class has to be replaced accordingly (`Ctrl + H`).
   - [FileManager](https://github.com/NicklasRatay/VBA-Library/tree/main/src/FileManager.cls)
 # Methods
  - [Copy](#copy)
