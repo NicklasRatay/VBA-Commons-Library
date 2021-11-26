@@ -8,7 +8,7 @@ Private Sub ExportAll()
     Dim component As Object
     Dim components As Object
     Dim ext As String
-    Dim Path As String
+    Dim path As String
     
     On Error GoTo TrustCenterIssue
         Set components = ThisWorkbook.VBProject.VBComponents ' Throws exception if trust center does not trust programmatic access
@@ -16,10 +16,10 @@ Private Sub ExportAll()
     
     Set fso = CreateObject("Scripting.FileSystemObject")
     
-    Path = ThisWorkbook.Path & "\dist"
+    path = ThisWorkbook.path & "\dist"
     
-    If Not fso.FolderExists(Path) Then
-        fso.CreateFolder Path
+    If Not fso.FolderExists(path) Then
+        fso.CreateFolder path
     End If
     
     For Each component In components
@@ -33,7 +33,7 @@ Private Sub ExportAll()
             Case Else
                 GoTo NextIteration
         End Select
-        component.Export Path & "\" & component.Name & ext
+        component.Export path & "\" & component.Name & ext
 NextIteration:
     Next component
     
