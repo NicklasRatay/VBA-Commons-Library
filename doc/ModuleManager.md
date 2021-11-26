@@ -1,5 +1,7 @@
 ﻿# Description
 This class provides a method to easily export all modules, classes and forms of a VBA-project. To use the method it simply has to be run from the Visual Basic Editor using `F5` while the selection-cursor is inside the method code.
+
+This module makes use of `ThisWorkbook.Path` to get the current working directory. To use this module inside other applications like *Word* or *Access* every occurrence of `ThisWorkbook.Path` in this class has to be replaced accordingly (`Ctrl + H`).
   - [ModuleManager](https://github.com/NicklasRatay/VBA-Library/tree/main/src/ModuleManager.bas)
 # Methods
  - [ExportAll](#exportall)
