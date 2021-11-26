@@ -1,14 +1,16 @@
 ﻿# Description
 This class provides utility functions for dealing with the file system and common IO-Operations. Among other things it is an interface for the `Scripting.FileSystemObject`.
-It does not matter if `\` or `/` is used as separator for specifying paths. Relative paths can be referenced by using `.` or `..` at the beginning. This applies to all methods.
-Valid string representations of a path:
- - C:\\Windows\\explorer.exe
- - ./resourcesInCurrent/testImage.jpg
- - .\.\\resourcesInParent\\testImage.jpg
- - .
- - .\.
 
-This class makes use of `ThisWorkbook.Path` to get the current working directory. To use this class inside other applications like *Word* or *Access* for example every occurrence of `ThisWorkbook.Path` in this class has to be replaced accordingly (`CTRL + H`).
+It does not matter if `\` or `/` is used as separator when specifying paths. By using `.` or `..` at the beginning the current working directory or its parent directory can be referenced respectively. This applies to all methods.
+
+Valid string representations of a path:
+ - "C:\\Windows\\explorer.exe"
+ - "./resourcesInCurrent/testImage.jpg"
+ - ".\.\\resourcesInParent\\testImage.jpg"
+ - "."
+ - ".\."
+
+This class makes use of `ThisWorkbook.Path` to get the current working directory or its parent directory. To use this class inside other applications like *Word* or *Access* every occurrence of `ThisWorkbook.Path` in this class has to be replaced accordingly (`CTRL + H`).
   - [FileManager](https://github.com/NicklasRatay/VBA-Library/tree/main/src/FileManager.cls)
 # Methods
  - [Copy](#copy)
