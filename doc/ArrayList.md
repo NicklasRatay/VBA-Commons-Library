@@ -8,7 +8,7 @@ There are two ArrayList classes due to the fact that the compiler requires the u
   - ArrayListObject: This class accepts every kind of object and changing the data type of the internal array to a specific class does not improve performance. Therefore it can be used as it is for all types of objects without impacting runtime.   
 
   - ArrayListVariant: The data type `Variant` can accept every primitive data type but this flexibility comes with a bad impact on performance.
-It is advised to change the data type of the internal array of this class if heavy workload is expected. This can be done by simply replacing the keyword `Variant` within the whole class module with the needed data type (Shortcut: `ctrl + h`) and renaming the class accordingly. An *ArrayList* class of type `String` for example should be named *ArrayListString*.
+It is advised to change the data type of the internal array of this class if heavy workload is expected. This can be done by simply replacing the keyword `Variant` within the whole class module with the needed data type (Shortcut: `Ctrl + H`) and renaming the class accordingly. An *ArrayList* class of type `String` for example should be named *ArrayListString*.
 
 # Methods
  - [Add](#add)
