@@ -115,6 +115,8 @@ Public Function Contains(ByVal item As Variant) As Boolean
 
     Dim i As Long, Size As Long
     
+    Size = Me.Size
+    
     If Size = 0 Then
         Exit Function
     End If
@@ -138,14 +140,16 @@ End Function
 ' Returns the index of the first occurrence of <item> in this array or -1 if this array does not contain <item>
 Public Function IndexOf(ByVal item As Variant) As Long
 
-    Dim i As Long
+    Dim i As Long, Size As Long
     
-    If Me.Size = 0 Then
+    Size = Me.Size
+    
+    If Size = 0 Then
         IndexOf = -1
         Exit Function
     End If
     
-    For i = 0 To Me.Size - 1
+    For i = 0 To Size - 1
         If Me.GetItem(i) = item Then
             IndexOf = i
             Exit Function
@@ -206,13 +210,15 @@ End Function
 ' Removes all items that are contained in <list> and returns <True> when at least one item has been removed
 Public Function RemoveAll(ByVal list As ArrayListVariant) As Boolean
 
-    Dim i As Long, j As Long
+    Dim i As Long, j As Long, Size As Long
     
-    If Me.Size = 0 Or list.Size = 0 Then
+    Size = Me.Size
+    
+    If Size = 0 Or list.Size = 0 Then
         Exit Function
     End If
     
-    For i = Me.Size - 1 To 0 Step -1
+    For i = Size - 1 To 0 Step -1
         For j = list.Size - 1 To 0 Step -1
             If Me.GetItem(i) = list.GetItem(j) Then
                 Me.Remove i
@@ -229,14 +235,16 @@ End Function
 Public Function RemoveDuplicates() As Boolean
 
     Dim duplicates As New ArrayListVariant
-    Dim i As Long, j As Long
+    Dim i As Long, j As Long, Size As Long
     
-    If Me.Size = 0 Then
+    Size = Me.Size
+    
+    If Size = 0 Then
         Exit Function
     End If
     
     For i = 0 To Me.Size - 3
-        For j = i + 1 To Me.Size - 1
+        For j = i + 1 To Size - 1
             If Not duplicates.Contains(j) Then
                 If Me.GetItem(i) = Me.GetItem(j) Then
                     duplicates.Add j
@@ -286,10 +294,12 @@ End Function
 ' Removes all items that are not contained in <list> and returns <True> when at least one item has been removed
 Public Function RetainAll(ByVal list As ArrayListVariant) As Boolean
     
-    Dim i As Long, j As Long
+    Dim i As Long, j As Long, Size As Long
     Dim flag As Boolean
     
-    If Me.Size = 0 Then
+    Size = Me.Size
+    
+    If Size = 0 Then
         Exit Function
     ElseIf list.Size = 0 Then
         Me.Clear
@@ -297,7 +307,7 @@ Public Function RetainAll(ByVal list As ArrayListVariant) As Boolean
         Exit Function
     End If
     
-    For i = Me.Size - 1 To 0 Step -1
+    For i = Size - 1 To 0 Step -1
         flag = False
         For j = list.Size - 1 To 0 Step -1
             If Me.GetItem(i) = list.GetItem(j) Then
@@ -370,15 +380,17 @@ End Function
 Public Sub Sort(Optional ByVal ascending As Boolean = True)
 
     Dim temp As Variant
-    Dim i As Long, j As Long
+    Dim i As Long, j As Long, Size As Long
     
-    If Me.Size <= 1 Then
+    Size = Me.Size
+    
+    If Size <= 1 Then
         Exit Sub
     End If
     
     If ascending Then
-        For i = 0 To Me.Size - 2
-            For j = i + 1 To Me.Size - 1
+        For i = 0 To Size - 2
+            For j = i + 1 To Size - 1
                 If Me.GetItem(i) > Me.GetItem(j) Then
                     temp = Me.GetItem(i)
                     Me.SetItem Me.GetItem(j), i
@@ -387,8 +399,8 @@ Public Sub Sort(Optional ByVal ascending As Boolean = True)
             Next j
         Next i
     Else
-        For i = 0 To Me.Size - 2
-            For j = i + 1 To Me.Size - 1
+        For i = 0 To Size - 2
+            For j = i + 1 To Size - 1
                 If Me.GetItem(i) < Me.GetItem(j) Then
                     temp = Me.GetItem(i)
                     Me.SetItem Me.GetItem(j), i
